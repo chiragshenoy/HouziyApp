@@ -2,12 +2,14 @@ package com.visualizedsort.chiragshenoy.visualizedsort;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Chirag Shenoy on 21-Dec-15.
@@ -17,14 +19,52 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     Context context;
 
 
-    public void remove(int position) {
-        mDataset.remove(position);
-        notifyItemRemoved(position);
+    public void remove(int a, int b) {
+        mDataset.remove(a);
+        mDataset.remove(b);
+        notifyItemRemoved(a);
+        notifyItemRemoved(b);
+
     }
 
-    public void add(String text, int position) {
-        mDataset.add(position, text);
-        notifyItemInserted(position);
+    public void add(String texta, int positiona, String textb, int positionb) {
+        mDataset.add(positiona, texta);
+        mDataset.add(positionb, textb);
+        notifyItemInserted(positiona);
+    }
+
+    public void swap(int a, int b) {
+//        String tempA = mDataset.get(a);
+//        String tempB = mDataset.get(b);
+////
+//        mDataset.remove(a);
+//        notifyItemRemoved(a);
+//
+//        mDataset.remove(b);
+//        notifyItemRemoved(b);
+//
+//        mDataset.add(b + 2, tempA);
+//        notifyItemInserted(b);
+//
+//        mDataset.add(a, tempB);
+//        notifyItemInserted(a);
+
+//
+//        mDataset.remove(b);
+//        notifyItemRemoved(b);
+//
+//        mDataset.add(a, tempB);
+//        notifyItemInserted(a);
+//        mDataset.add(b-1, tempA);
+//        notifyItemInserted(b);
+//
+        Collections.swap(mDataset, a, b);
+//        Log.e("sorts ", mDataset.toString());
+        notifyItemMoved(a, b);
+        notifyItemMoved(b - 1, a);
+//        notifyItemMoved(a, b);
+
+
     }
 
     // Provide a reference to the views for each data item

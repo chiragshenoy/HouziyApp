@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
@@ -33,10 +34,13 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setItemAnimator(new SlideInLeftAnimator());
 
+        mRecyclerView.getItemAnimator().setAddDuration(1000);
+        mRecyclerView.getItemAnimator().setRemoveDuration(1000);
+
         animate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAdapter.add("1000", 2);
+                swap(1,2);
             }
         });
 
@@ -67,5 +71,9 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
+    }
+
+    private void swap(int a, int b) {
+        mAdapter.swap(a, b);
     }
 }
